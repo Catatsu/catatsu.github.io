@@ -69,20 +69,19 @@
 
     
     
-    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/post-bg.jpg')">
-    
+    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
       <div class="container">
         <div class="row">
            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
              <div class="post-heading">
                <h1>Catatsuの技術ブログ始めました！</h1>
                <h2 class="subheading"></h2>
-               <span class="meta">Posted by <a href="#">Benoît Benedetti</a> on Fri, Sep 23, 2016
+               <span class="meta">Posted by <a href="#">nabeen</a> on Fri, Sep 23, 2016
                  <br />
                  In <a href="https://catatsu.github.io/categories/information">Information</a>
 
                  <br />
-                 Tags 
+                 Tags <a href="https://catatsu.github.io/tags/hugo">hugo</a>, <a href="https://catatsu.github.io/tags/wercker">wercker</a>, <a href="https://catatsu.github.io/tags/github-pages">github pages</a>
                </span>
              </div>
            </div>
@@ -95,7 +94,72 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <p>投稿テスト！</p>
+                  
+
+<p>どうも僕(<a href="https://github.com/nabeen">@nabeen</a>)です。</p>
+
+<p>有志でやってる<a href="https://github.com/Catatsu">Catatsu</a>というプロジェクトがあるんですが、せっかくなのでってことでプロジェクト用のブログを立ち上げることにしました！エンジニア的にはアウトプットした方がいいしね？？</p>
+
+<h2 id="どこで書くかを決める">どこで書くかを決める</h2>
+
+<p>金無し職無しスキル無しの僕らはそんなに高望みはしません。<strong>無料で使えるものを最大限に活用します。</strong>Tech Blogってこともあり、以下の点に重きを置いて選定しました。</p>
+
+<ul>
+<li>Markdownで書けること</li>
+<li>一生涯無料で利用できること</li>
+<li>ギークな感じのするもの ← これ重要</li>
+</ul>
+
+<p>もうここまでくれば決まったようなもの。Hugoを使って、Werckerでbuild、deployするのがベストプラクティスだと信じ、この構成で作りました。</p>
+
+<h2 id="構成">構成</h2>
+
+<ul>
+<li><a href="https://github.com/Catatsu/catatsu.github.io">catatsu.github.io</a>：Github Pagesホスティング用</li>
+<li><a href="https://github.com/Catatsu/catatsu.blog">catatsu.blog</a>：Hugo管理用</li>
+</ul>
+
+<p>同じリポジトリだとなんだか面倒くさそうな匂いがプンプンしたので、サクッと作れて単純明快ということでホスティング用リポジトリと管理用リポジトリで分けています。</p>
+
+<h2 id="記事作成手順">記事作成手順</h2>
+
+<p>デフォルトだとちょっと扱いづらいので、shellを叩いて記事を作成するようにしてあります。</p>
+
+<pre><code>$ sh create.sh hello-world
+</code></pre>
+
+<p>参考：<a href="http://blog.sgr-ksmt.org/2016/02/05/hugo_new_post/">&lsquo;hugo new&rsquo;を便利にするスクリプト</a></p>
+
+<p>あとは記事を書いてpushするだけで公開されます。楽ちん。</p>
+
+<h2 id="werckerの設定">Werckerの設定</h2>
+
+<p>Werckerでハマったので、そこだけ記載しておきます。全て公式が古いのが悪いです。僕は悪くありません。ハマった時間を返して(ry</p>
+
+<p><code>wercker.yml</code>はこんな感じで設定しましょう。</p>
+
+<pre><code class="language-yml">box: debian
+build:
+  steps:
+    - arjen/hugo-build@1.12.0:
+      flags: --buildDrafts=false
+      theme: startbootstrap-clean-blog
+deploy:
+  steps:
+    - install-packages:
+        packages: git ssh-client
+    - leipert/git-push:
+        gh_oauth: $GIT_TOKEN
+        basedir: public
+        repo: Catatsu/catatsu.github.io
+        branch: master
+</code></pre>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>GithubPages × Hugo × Werckerでサクッとブログを立ち上げられるってのは非常に便利ですね。日本中全ての会社でサクッとツルッとブログを立ち上げるといいですよ。</p>
+
+<p>さて、次は<a href="https://github.com/matumotto">@matumotto</a>がいい感じにデザインを整えてくれるはずなので、次回も乞うご期待！</p>
 
                 </div>
             </div>
@@ -109,38 +173,12 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <ul class="list-inline text-center">
-                    <li>
-                      <a href="mailto:benoit.benedetti@gmail.com">
-                        <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-                        </span>
-                      </a>
-                    </li>
                     
                     <li>
-                      <a href="https://twitter.com/humboldtux">
-                        <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                        </span>
-                      </a>
-                    </li>
-                    
-                    <li>
-                      <a href="https://github.com/humboldtux">
+                      <a href="https://github.com/Catatsu">
                         <span class="fa-stack fa-lg">
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                      </a>
-                    </li>
-                    
-                    <li>
-                      <a href="https://www.facebook.com/FACEBOOKHANDLE">
-                        <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
                         </span>
                       </a>
                     </li>
