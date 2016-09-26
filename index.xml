@@ -7,8 +7,104 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
-    <lastBuildDate>Fri, 23 Sep 2016 20:22:41 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Sep 2016 21:09:27 +0900</lastBuildDate>
     <atom:link href="https://catatsu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【イベントレポート】HackerTackleに参加してきた #hackt</title>
+      <link>https://catatsu.github.io/2016/09/26/hackertackle</link>
+      <pubDate>Mon, 26 Sep 2016 21:09:27 +0900</pubDate>
+      
+      <guid>https://catatsu.github.io/2016/09/26/hackertackle</guid>
+      <description>
+
+&lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/nabeen&#34;&gt;@nabeen&lt;/a&gt;)です。&lt;/p&gt;
+
+&lt;p&gt;今更感が半端ないですが、先日開催された&lt;a href=&#34;https://hackertackle.github.io/&#34;&gt;HackerTackle&lt;/a&gt;に参加してきたので、そのイベントレポートをば！もう一ヶ月近く前の話だから、半分以上忘れてしまったいるッ！&lt;/p&gt;
+
+&lt;h2 id=&#34;セッション一覧&#34;&gt;セッション一覧&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://hackertackle.github.io/&#34;&gt;公式&lt;/a&gt;をご参考あれ。&lt;/p&gt;
+
+&lt;p&gt;べ、別に書くのが面倒くさいわけじゃないからねっ！&lt;/p&gt;
+
+&lt;h2 id=&#34;セッション詳細&#34;&gt;セッション詳細&lt;/h2&gt;
+
+&lt;p&gt;では僕が聞いたセッションと感想をバババーっと見ていきましょうー。さっきも言ったけど、もう半分以上は記憶がない。やっぱりこういうのは頭が新鮮なうちに書くべきやなーと改めて思いますた。&lt;/p&gt;
+
+&lt;h3 id=&#34;vr-ar-mr-ってなんだっけ-unityで作ってみる&#34;&gt;VR？AR？MR？ってなんだっけ？Unityで作ってみる&lt;/h3&gt;
+
+&lt;p&gt;Vuforiaを使えばUnityで超簡単にAR出来ちゃうぜ！って話。&lt;/p&gt;
+
+&lt;p&gt;何を隠そう、僕はこのセッションに触発されてUnityでARを始めました！いいよーいいよーARいいよー。AR/VR/MRは、これまでとは一線を画すようなUXが提供できるので、今後もどんどん伸びていく分野だと個人的には思っています。&lt;/p&gt;
+
+&lt;p&gt;んで、今日時点で企業として本格的にAR/VR/MRに取り組んでいるところはまだ多くはない印象。ってことは、今から始めればアーリーアダプタになれますぜ、兄さん。&lt;/p&gt;
+
+&lt;p&gt;発表資料：&lt;a href=&#34;http://kzonag.hatenablog.com/entry/2016/09/12/231614&#34;&gt;Hacker Tackle 2016でVR/AR/MRの話をしてきました&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;スマートフォン体験を一歩先へ-プログレッシブウェブアプリの作り方&#34;&gt;スマートフォン体験を一歩先へ プログレッシブウェブアプリの作り方&lt;/h3&gt;
+
+&lt;p&gt;一言で言えば、「ネイティブアプリ要らなくね？」って話です。&lt;/p&gt;
+
+&lt;p&gt;プログレッシブウェブアプリで出来ることは以下。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ホームアイコン&lt;/li&gt;
+&lt;li&gt;スプラッシュ画面&lt;/li&gt;
+&lt;li&gt;全画面&lt;/li&gt;
+&lt;li&gt;オフライン対応&lt;/li&gt;
+&lt;li&gt;Push通知（ただしAndroidに限る）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;僕「やべぇ、ネイティブで欲しい機能全部あるやん。」&lt;/p&gt;
+
+&lt;p&gt;ソシャゲなんかはネイティブでゴリゴリやらないといけない部分があったりするけど、ツール系だったりEC系だったり、WEBベースのものに関してはこれからこういう流れが加速していくかも？特に僕が担当しているサービスなんかまさにこれ（って言ってメンバーに話したら全く乗り気じゃなかった罠。&lt;/p&gt;
+
+&lt;p&gt;発表資料：&lt;a href=&#34;https://docs.google.com/presentation/d/1wYHzG3uezJz2LBEWleVBpw8oYT_to7YowwP7PW2gkuI/pub?start=false&amp;amp;loop=false&amp;amp;delayms=3000&amp;amp;slide=id.gf39949af9_0_0&#34;&gt;プログレッシブウェブアプリの作り方&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;今日からkotlinでandroid開発を始められるようになる話&#34;&gt;今日からKotlinでAndroid開発を始められるようになる話&lt;/h3&gt;
+
+&lt;p&gt;KotlinならJavaより簡潔に記述できまっせーって話。&lt;/p&gt;
+
+&lt;p&gt;ただ悲しきかな、Javaをやったことが無い僕は、話の半分以上わかりませんでしたとさ。&lt;/p&gt;
+
+&lt;p&gt;確かにKotlinの方が短く直感的に書けることはわかる。でも、やっぱりこういうのは予備知識があった上で聞かないとって感じですね。予習しとけばよかったでござる。&lt;/p&gt;
+
+&lt;p&gt;発表資料：見つからない&amp;hellip;けど、たろうさんの&lt;a href=&#34;https://speakerdeck.com/ntaro&#34;&gt;他の発表資料&lt;/a&gt;を見つけた&lt;/p&gt;
+
+&lt;h3 id=&#34;ハッカーの思考でqolを向上させよう&#34;&gt;ハッカーの思考でQoLを向上させよう！&lt;/h3&gt;
+
+&lt;p&gt;すみません、マインスイーパーが高速でクリアされていく様しか覚えていませんww&lt;/p&gt;
+
+&lt;p&gt;あとはKinectセンサーでリアルタイムで3Dモデルに踊らせたりとか、あーこういうことも出来るのかーっていう部分が多かったです。ただ、このセッションを聞いてQoLが向上するかどうかは定かではありません。&lt;/p&gt;
+
+&lt;p&gt;Kinectセンサーは、ARアプリと組み合わせるといい感じになりそう！&lt;/p&gt;
+
+&lt;p&gt;発表資料：見つからない&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;俺が考えた最強のreactiveインターフェイス&#34;&gt;俺が考えた最強のReactiveインターフェイス&lt;/h3&gt;
+
+&lt;p&gt;はい、Reactiveのりの字も知らない僕が通りますよっと。&lt;/p&gt;
+
+&lt;p&gt;内容自体は、「Reactiveをやってれば困るであろう」部分にフォーカスした内容でした。ただReactiveを知らない僕にとってはそのユースケースは全くピンとこず。でも若干Reactiveプログラミングってどんなもんなのかっていう知識は身につきました。&lt;/p&gt;
+
+&lt;p&gt;後で調べたんだけど、各言語でReactive向けのライブラリが結構あるみたいですね（RxJSとか）。そもそも僕、SwiftはHello World程度なので、他の言語で始めるのがベストプラクティスだと思った。最近はJS気になってるから、JSで始めてみよう！そうだそうしよう！&lt;/p&gt;
+
+&lt;p&gt;発表資料：見つからない&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;ブロックチェーンでフィンテックするビジネスに可能性を感じている皆様へ&#34;&gt;ブロックチェーンでフィンテックするビジネスに可能性を感じている皆様へ&lt;/h3&gt;
+
+&lt;p&gt;ブロックチェーンの概念的な部分の話。&lt;/p&gt;
+
+&lt;p&gt;ぶっちゃけ全くわからんかったです。。。だいがくのせんせいのおはなしむずかしい。&lt;/p&gt;
+
+&lt;p&gt;発表資料：見つからない&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+
+&lt;p&gt;次のイベントは&lt;a href=&#34;http://event.shoeisha.jp/devsumi/20160929/&#34;&gt;デブサミ&lt;/a&gt;です！行けるかどうかはわからんけども。もし知ってる人に会ったら大きい声でこんにちはって言いますね！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Catatsuの技術ブログ始めました！</title>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Catatsu Tech Blog</title>
-    <link>https://catatsu.github.io/post/</link>
-    <description>Recent content in Posts on Catatsu Tech Blog</description>
+    <title>Kotlin on Catatsu Tech Blog</title>
+    <link>https://catatsu.github.io/tags/kotlin/</link>
+    <description>Recent content in Kotlin on Catatsu Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
     <lastBuildDate>Mon, 26 Sep 2016 21:09:27 +0900</lastBuildDate>
-    <atom:link href="https://catatsu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://catatsu.github.io/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>【イベントレポート】HackerTackleに参加してきた #hackt</title>
@@ -103,83 +103,6 @@
 &lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
 
 &lt;p&gt;次のイベントは&lt;a href=&#34;http://event.shoeisha.jp/devsumi/20160929/&#34;&gt;デブサミ&lt;/a&gt;です！行けるかどうかはわからんけども。もし知ってる人に会ったら大きい声でこんにちはって言いますね！&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Catatsuの技術ブログ始めました！</title>
-      <link>https://catatsu.github.io/2016/09/23/initial-commit</link>
-      <pubDate>Fri, 23 Sep 2016 20:22:41 +0900</pubDate>
-      
-      <guid>https://catatsu.github.io/2016/09/23/initial-commit</guid>
-      <description>
-
-&lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/nabeen&#34;&gt;@nabeen&lt;/a&gt;)です。&lt;/p&gt;
-
-&lt;p&gt;有志でやってる&lt;a href=&#34;https://github.com/Catatsu&#34;&gt;Catatsu&lt;/a&gt;というプロジェクトがあるんですが、せっかくなのでってことでプロジェクト用のブログを立ち上げることにしました！エンジニア的にはアウトプットした方がいいしね？？&lt;/p&gt;
-
-&lt;h2 id=&#34;どこで書くかを決める&#34;&gt;どこで書くかを決める&lt;/h2&gt;
-
-&lt;p&gt;金無し職無しスキル無しの僕らはそんなに高望みはしません。&lt;strong&gt;無料で使えるものを最大限に活用します。&lt;/strong&gt;Tech Blogってこともあり、以下の点に重きを置いて選定しました。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Markdownで書けること&lt;/li&gt;
-&lt;li&gt;一生涯無料で利用できること&lt;/li&gt;
-&lt;li&gt;ギークな感じのするもの ← これ重要&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;もうここまでくれば決まったようなもの。Hugoを使って、Werckerでbuild、deployするのがベストプラクティスだと信じ、この構成で作りました。&lt;/p&gt;
-
-&lt;h2 id=&#34;構成&#34;&gt;構成&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Catatsu/catatsu.github.io&#34;&gt;catatsu.github.io&lt;/a&gt;：Github Pagesホスティング用&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Catatsu/catatsu.blog&#34;&gt;catatsu.blog&lt;/a&gt;：Hugo管理用&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;同じリポジトリだとなんだか面倒くさそうな匂いがプンプンしたので、サクッと作れて単純明快ということでホスティング用リポジトリと管理用リポジトリで分けています。&lt;/p&gt;
-
-&lt;h2 id=&#34;記事作成手順&#34;&gt;記事作成手順&lt;/h2&gt;
-
-&lt;p&gt;デフォルトだとちょっと扱いづらいので、shellを叩いて記事を作成するようにしてあります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sh create.sh hello-world
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参考：&lt;a href=&#34;http://blog.sgr-ksmt.org/2016/02/05/hugo_new_post/&#34;&gt;&amp;lsquo;hugo new&amp;rsquo;を便利にするスクリプト&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;あとは記事を書いてpushするだけで公開されます。楽ちん。&lt;/p&gt;
-
-&lt;h2 id=&#34;werckerの設定&#34;&gt;Werckerの設定&lt;/h2&gt;
-
-&lt;p&gt;Werckerでハマったので、そこだけ記載しておきます。全て公式が古いのが悪いです。僕は悪くありません。ハマった時間を返して(ry&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;wercker.yml&lt;/code&gt;はこんな感じで設定しましょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;box: debian
-build:
-  steps:
-    - arjen/hugo-build@1.12.0:
-      flags: --buildDrafts=false
-      theme: startbootstrap-clean-blog
-deploy:
-  steps:
-    - install-packages:
-        packages: git ssh-client
-    - leipert/git-push:
-        gh_oauth: $GIT_TOKEN
-        basedir: public
-        repo: Catatsu/catatsu.github.io
-        branch: master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参考：&lt;a href=&#34;https://blog.nabetama.com/post/2016-05-12-30/&#34;&gt;Hugo, github pages, werckerで自動デプロイ 2016/05/12版&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
-
-&lt;p&gt;GithubPages × Hugo × Werckerでサクッとブログを立ち上げられるってのは非常に便利ですね。日本中全ての会社でサクッとツルッとブログを立ち上げるといいですよ。&lt;/p&gt;
-
-&lt;p&gt;さて、次は&lt;a href=&#34;https://github.com/matumotto&#34;&gt;@matumotto&lt;/a&gt;がいい感じにデザインを整えてくれるはずなので、次回も乞うご期待！&lt;/p&gt;
 </description>
     </item>
     
