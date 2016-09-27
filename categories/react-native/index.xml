@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React Native on Catatsu Tech Blog</title>
+    <link>https://catatsu.github.io/categories/react-native/</link>
+    <description>Recent content in React Native on Catatsu Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Tue, 27 Sep 2016 23:35:00 +0900</lastBuildDate>
+    <atom:link href="https://catatsu.github.io/categories/react-native/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ReactNativeの開発環境構築~HelloWorld</title>
+      <link>https://catatsu.github.io/2016/09/27/react-native-tutorial</link>
+      <pubDate>Tue, 27 Sep 2016 23:35:00 +0900</pubDate>
+      
+      <guid>https://catatsu.github.io/2016/09/27/react-native-tutorial</guid>
+      <description>
+
+&lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/matumotto&#34;&gt;@matumotto&lt;/a&gt;)です。
+ReactNativeを久しぶりに覗いたらバージョンがめっちゃがってたので、1からやりなおしていきます。&lt;/p&gt;
+
+&lt;p&gt;※OS X環境想定&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;reactnativeでhelloworldまでやってみる&#34;&gt;ReactNativeでHelloWorldまでやってみる&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;環境準備&#34;&gt;環境準備&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;まずnode.jsとwatchmanをインストール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install node
+brew install watchman
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;※watchmanは推奨。Facebook製のファイル監視ツール。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;npmでReactNativeのコマンドツールをインストール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g react-native-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;プロジェクト作成-ビルド&#34;&gt;プロジェクト作成〜ビルド&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;まずはプロジェクトを作成する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;react-native init TestProject
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;移動&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt; cd TestProject
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android用にビルドして実行
+※事前にエミュレータを立ち上げておいてください(もしくは実機接続)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt; #実機でやる場合のみ必須
+ adb reverse tcp:8081 tcp:8081
+ react-native run-android
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;アプリが立ち上がった&#34;&gt;アプリが立ち上がった！&lt;/h3&gt;
+
+&lt;p&gt;すこし文言を替えてみます！
+ 起動したままで、プロジェクト内にある&amp;rdquo;index.android.js&amp;rdquo;を変更してみましょう！&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;文言を変更する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt; sed -i &#39;&#39; &#39;s/Welcome to React Native!/Hello React!/g&#39; index.android.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アプリに反映
+アプリのメニューからReloadを選択するとテキストが更新されます。
+Hello React! やったね！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;おしまい。&lt;/p&gt;
+
+&lt;p&gt;つぎは何かモノを作っていきます。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

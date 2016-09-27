@@ -9,11 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tags -- Catatsu Tech Blog</title>
+    <title>ReactNativeの開発環境構築~HelloWorld -- Catatsu Tech Blog</title>
 
-    
-    <link href="https://catatsu.github.io/tags/index.xml" rel="alternate" type="application/rss+xml" title="Catatsu Tech Blog" />
-    <link href="https://catatsu.github.io/tags/index.xml" rel="feed" type="application/rss+xml" title="Catatsu Tech Blog" />
     
 
     
@@ -74,61 +71,132 @@
 
 
     
+    
     <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
-     <div class="container">
-       <div class="row">
-         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-           <div class="site-heading">
-             <h1>Tags</h1>
-             <hr class="small">
-             <span class="subheading">Tags</span>
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>ReactNativeの開発環境構築~HelloWorld</h1>
+               <h2 class="subheading">ReactNativeの開発環境構築~HelloWorld</h2>
+               <span class="meta">Posted by <a href="#">matumotto</a> on Tue, Sep 27, 2016
+                 <br />
+                 In <a href="https://catatsu.github.io/categories/react-native">React-Native</a>
+
+                 <br />
+                 Tags <a href="https://catatsu.github.io/tags/reactnative">reactnative</a>, <a href="https://catatsu.github.io/tags/development">development</a>
+               </span>
+             </div>
            </div>
-         </div>
-       </div>
-     </div>
+        </div>
+      </div>
     </header>
 
     
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-          <ul>
-            
-            
-            <li><a href="https://catatsu.github.io/tags/action-cable">Action-Cable</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/ar">Ar</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/development">Development</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/github-pages">Github-Pages</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/hacker-tackle">Hacker-Tackle</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/hugo">Hugo</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/kotlin">Kotlin</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/mr">Mr</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/progressive">Progressive</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/rails">Rails</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/reactive">Reactive</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/reactnative">Reactnative</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/ruby">Ruby</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/vr">Vr</a> 1</li>
-            
-            <li><a href="https://catatsu.github.io/tags/wercker">Wercker</a> 1</li>
-            
-          </ul>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<p>どうも僕(<a href="https://github.com/matumotto">@matumotto</a>)です。
+ReactNativeを久しぶりに覗いたらバージョンがめっちゃがってたので、1からやりなおしていきます。</p>
+
+<p>※OS X環境想定</p>
+
+<hr />
+
+<h2 id="reactnativeでhelloworldまでやってみる">ReactNativeでHelloWorldまでやってみる</h2>
+
+<hr />
+
+<h3 id="環境準備">環境準備</h3>
+
+<ul>
+<li>まずnode.jsとwatchmanをインストール</li>
+</ul>
+
+<pre><code>brew install node
+brew install watchman
+</code></pre>
+
+<p>※watchmanは推奨。Facebook製のファイル監視ツール。</p>
+
+<ul>
+<li>npmでReactNativeのコマンドツールをインストール</li>
+</ul>
+
+<pre><code>npm install -g react-native-cli
+</code></pre>
+
+<hr />
+
+<h3 id="プロジェクト作成-ビルド">プロジェクト作成〜ビルド</h3>
+
+<ul>
+<li>まずはプロジェクトを作成する</li>
+</ul>
+
+<pre><code>react-native init TestProject
+</code></pre>
+
+<ul>
+<li>移動</li>
+</ul>
+
+<pre><code> cd TestProject
+</code></pre>
+
+<ul>
+<li>Android用にビルドして実行
+※事前にエミュレータを立ち上げておいてください(もしくは実機接続)</li>
+</ul>
+
+<pre><code> #実機でやる場合のみ必須
+ adb reverse tcp:8081 tcp:8081
+ react-native run-android
+</code></pre>
+
+<hr />
+
+<h3 id="アプリが立ち上がった">アプリが立ち上がった！</h3>
+
+<p>すこし文言を替えてみます！
+ 起動したままで、プロジェクト内にある&rdquo;index.android.js&rdquo;を変更してみましょう！</p>
+
+<ul>
+<li>文言を変更する</li>
+</ul>
+
+<pre><code> sed -i '' 's/Welcome to React Native!/Hello React!/g' index.android.js
+</code></pre>
+
+<ul>
+<li>アプリに反映
+アプリのメニューからReloadを選択するとテキストが更新されます。
+Hello React! やったね！</li>
+</ul>
+
+<p>おしまい。</p>
+
+<p>つぎは何かモノを作っていきます。</p>
+
+                </div>
+            </div>
+            <div id="disqus_thread"></div>
         </div>
-      </div>
-    </div>
+        <script>
+        
+
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = '//catatsu.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
 
     <hr>
     
