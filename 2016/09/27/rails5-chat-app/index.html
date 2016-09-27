@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Rails5で爆速チャットアプリを作ってみた -- Catatsu Tech Blog</title>
+
+    
+
+    
+    <link href="https://catatsu.github.io/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://catatsu.github.io/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    <link rel="shortcut icon" href="https://catatsu.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://catatsu.github.io">Catatsu Tech Blog</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Rails5で爆速チャットアプリを作ってみた</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">nabeen</a> on Tue, Sep 27, 2016
+                 <br />
+                 In <a href="https://catatsu.github.io/categories/rails">Rails</a>
+
+                 <br />
+                 Tags <a href="https://catatsu.github.io/tags/rails">rails</a>, <a href="https://catatsu.github.io/tags/ruby">ruby</a>, <a href="https://catatsu.github.io/tags/action-cable">action cable</a>
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<p>どうも僕(<a href="https://github.com/nabeen">@nabeen</a>)です。</p>
+
+<p>Rails5では、コアを構成するライブラリにAction Cableが追加されました。これを使うと、Web Socketを使ったリアルタイムなチャットアプリケーションが簡単に作れるらしい、、！？</p>
+
+<p>※本記事は<a href="http://gihyo.jp/magazine/wdpress/archive/2016/vol93">WEB+DB PRESS Vol.93</a>の内容を一部改変したものになります。</p>
+
+<h2 id="前準備">前準備</h2>
+
+<p>まずはローカルにプロジェクト用のディレクトリを掘る。</p>
+
+<pre><code class="language-bash">$ mkdir trailen
+$ cd trailen
+</code></pre>
+
+<p>んでgit管理下にして、<code>README.md</code>を追加しておきます。</p>
+
+<pre><code class="language-bash">$ git init
+$ touch README.md
+$ echo &quot;trailen&quot; &gt;&gt; README.md
+</code></pre>
+
+<p><code>.gitignore</code>は<code>gibo</code>で作るのがトレンドだと信じているので、giboを使って生成しようそうしよう。</p>
+
+<pre><code class="language-bash">$ touch .gitignore
+$ gibo OSX Ruby Rails Vagrant JetBrains &gt;&gt; .gitignore
+</code></pre>
+
+<h2 id="開発環境構築">開発環境構築</h2>
+
+<p>僕は<a href="https://github.com/rails/rails-dev-box#whats-in-the-box">rails-dev-box</a>をベースにちょこっとカスタマイズして使いました。基本、cloneして来るだけで使えるのでここでは詳細は割愛。</p>
+
+<p>後は簡単ですね。</p>
+
+<pre><code class="language-bash">$ vagrant up
+$ vagrant ssh
+</code></pre>
+
+<h2 id="railsのインストール">Railsのインストール</h2>
+
+<p>グローバルに<code>rails</code>をインストールします。</p>
+
+<pre><code class="language-bash">$ sudo gem install rails
+$ rails -v
+Rails 5.0.0.1
+</code></pre>
+
+<p>最新版ｷﾀ━━━━(ﾟ∀ﾟ)━━━━!!</p>
+
+<h2 id="新規アプリの作成">新規アプリの作成</h2>
+
+<p>テストなし、DBをmysqlで作成します。完全に僕の好みです。テストはRspec使いたいんでね（この記事では書きません）。</p>
+
+<pre><code class="language-bash">$ rails new trailen -T -d mysql
+</code></pre>
+
+<p>DBは作ってくれないので、ここは手動で。</p>
+
+<pre><code class="language-sql">mysql&gt; create database trailen_development;
+Query OK, 1 row affected (0.00 sec)
+</code></pre>
+
+<p>ここまで来ればサーバー起動でデフォルト画面が表示されます（DBのパスワードとかはちゃんと設定してね）。rails5になってデフォルト画面変わっていることに少しの感動を覚える僕。</p>
+
+<pre><code class="language-bash">$ rails s -b 0.0.0.0 -p 8888
+</code></pre>
+
+<h2 id="コントローラーの作成">コントローラーの作成</h2>
+
+<p>長い前準備が終わり、ようやく本命のチャットアプリに着手します。ジェネレータでチャット表示用のコントローラーを作成します。</p>
+
+<pre><code class="language-bash">$ ./bin/rails g controller rooms show
+</code></pre>
+
+<h2 id="モデルの作成">モデルの作成</h2>
+
+<p>次は当然モデルですね。メッセージ保存用。</p>
+
+<pre><code class="language-bash">$ ./bin/rails g model message content:text
+$ ./bin/rails db:migrate
+</code></pre>
+
+<h2 id="ビューの作成">ビューの作成</h2>
+
+<p>本体と、</p>
+
+<pre><code class="language-haml">&lt;h1&gt;Chat room&lt;/h1&gt;
+
+&lt;div id=&quot;messages&quot;&gt;
+  &lt;%= render @messages %&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>パーシャル。</p>
+
+<pre><code class="language-haml">&lt;div class=&quot;message&quot;&gt;
+  &lt;p&gt;&lt;%= message.content%&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2 id="チャネルの作成">チャネルの作成</h2>
+
+<p>んで、これまたジェネレータでチャンネルを作っていきます。</p>
+
+<pre><code class="language-bash">$ ./bin/rails g channel room speak
+Running via Spring preloader in process 11323
+      create  app/channels/room_channel.rb
+   identical  app/assets/javascripts/cable.js
+      create  app/assets/javascripts/channels/room.coffee
+</code></pre>
+
+<p><code>app/channels/room_channel.rb</code>と<code>app/assets/javascripts/channels/room.coffee</code>が作成されました（ナニコレ）。前者がサーバーサイドの処理、後者がフロント側の処理を担当するっぽい。</p>
+
+<p>んで、ここまでくればWebSocketのコネクションが貼れるはずだったんだけど、ここでエラーが発生します。どうやら許可されていないホストらしい。わざわざ許可せないかんのか。</p>
+
+<pre><code class="language-bash">Started GET &quot;/cable&quot; for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+Cannot render console from 192.168.33.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started GET &quot;/cable/&quot; [WebSocket] for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+Request origin not allowed: http://192.168.33.33:8888
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished &quot;/cable/&quot; [WebSocket] for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+</code></pre>
+
+<p>先人によると、設定を追加してあげないといけないようで、</p>
+
+<p>参考：<a href="http://morizyun.github.io/blog/action-cable-introduction-reading/">Action CableのREADMEを読んでみた！</a></p>
+
+<p>僕の環境だと、以下の設定を<code>config/environments/development.rb</code>に追記してあげました。ここは人それぞれだと思うので、自信の環境に合うように設定してください。</p>
+
+<pre><code class="language-ruby">config.action_cable.allowed_request_origins = ['http://localhost:8888']
+</code></pre>
+
+<p>追記して再起動したらOKになりました。うん、いいね順調順調。</p>
+
+<pre><code class="language-bash">Finished &quot;/cable/&quot; [WebSocket] for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Started GET &quot;/cable&quot; for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started GET &quot;/cable/&quot; [WebSocket] for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+RoomChannel is transmitting the subscription confirmation
+</code></pre>
+
+<p>あとはもうガーッとコーディングしていけば完成！DBに突っ込んだりイベント発火させたりわちゃわちゃわちゃわちゃ必要だもんね。ガーッと書きましょう。ガーッと。</p>
+
+<p>で、この時点のコードを見たい方は<a href="https://github.com/nabeen/trailen/tree/chat-app-base">Github</a>に乗せていますので、そちらをご参照あれ（書く気力がなくなった）。
+もちろん本番で運用する場合はもっと設定が必要ですが、とりあえずサクッと作れそうだなという感触は得られましたね。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>今回はサクッと作るところまでで終わったけど、最終的にはあれやこれやしてメインのWEBアプリのサブ機能的な位置づけでひっそり存在するくらいにはしていきたいという願望。</p>
+
+<p>ぼくはれいるずとおともだちになるんだ！</p>
+
+                </div>
+            </div>
+            <div id="disqus_thread"></div>
+        </div>
+        <script>
+        
+
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = '//catatsu.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    <li>
+                      <a href="https://github.com/Catatsu">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://catatsu.github.io/js/jquery.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/bootstrap.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/clean-blog.js"></script>
+
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'XX-00000000-0', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

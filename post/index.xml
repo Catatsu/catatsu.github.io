@@ -7,8 +7,170 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
-    <lastBuildDate>Mon, 26 Sep 2016 21:09:27 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 27 Sep 2016 23:09:27 +0900</lastBuildDate>
     <atom:link href="https://catatsu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Rails5で爆速チャットアプリを作ってみた</title>
+      <link>https://catatsu.github.io/2016/09/27/rails5-chat-app</link>
+      <pubDate>Tue, 27 Sep 2016 23:09:27 +0900</pubDate>
+      
+      <guid>https://catatsu.github.io/2016/09/27/rails5-chat-app</guid>
+      <description>
+
+&lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/nabeen&#34;&gt;@nabeen&lt;/a&gt;)です。&lt;/p&gt;
+
+&lt;p&gt;Rails5では、コアを構成するライブラリにAction Cableが追加されました。これを使うと、Web Socketを使ったリアルタイムなチャットアプリケーションが簡単に作れるらしい、、！？&lt;/p&gt;
+
+&lt;p&gt;※本記事は&lt;a href=&#34;http://gihyo.jp/magazine/wdpress/archive/2016/vol93&#34;&gt;WEB+DB PRESS Vol.93&lt;/a&gt;の内容を一部改変したものになります。&lt;/p&gt;
+
+&lt;h2 id=&#34;前準備&#34;&gt;前準備&lt;/h2&gt;
+
+&lt;p&gt;まずはローカルにプロジェクト用のディレクトリを掘る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir trailen
+$ cd trailen
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;んでgit管理下にして、&lt;code&gt;README.md&lt;/code&gt;を追加しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git init
+$ touch README.md
+$ echo &amp;quot;trailen&amp;quot; &amp;gt;&amp;gt; README.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;.gitignore&lt;/code&gt;は&lt;code&gt;gibo&lt;/code&gt;で作るのがトレンドだと信じているので、giboを使って生成しようそうしよう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ touch .gitignore
+$ gibo OSX Ruby Rails Vagrant JetBrains &amp;gt;&amp;gt; .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;開発環境構築&#34;&gt;開発環境構築&lt;/h2&gt;
+
+&lt;p&gt;僕は&lt;a href=&#34;https://github.com/rails/rails-dev-box#whats-in-the-box&#34;&gt;rails-dev-box&lt;/a&gt;をベースにちょこっとカスタマイズして使いました。基本、cloneして来るだけで使えるのでここでは詳細は割愛。&lt;/p&gt;
+
+&lt;p&gt;後は簡単ですね。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ vagrant up
+$ vagrant ssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;railsのインストール&#34;&gt;Railsのインストール&lt;/h2&gt;
+
+&lt;p&gt;グローバルに&lt;code&gt;rails&lt;/code&gt;をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo gem install rails
+$ rails -v
+Rails 5.0.0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最新版ｷﾀ━━━━(ﾟ∀ﾟ)━━━━!!&lt;/p&gt;
+
+&lt;h2 id=&#34;新規アプリの作成&#34;&gt;新規アプリの作成&lt;/h2&gt;
+
+&lt;p&gt;テストなし、DBをmysqlで作成します。完全に僕の好みです。テストはRspec使いたいんでね（この記事では書きません）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ rails new trailen -T -d mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;DBは作ってくれないので、ここは手動で。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;mysql&amp;gt; create database trailen_development;
+Query OK, 1 row affected (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ここまで来ればサーバー起動でデフォルト画面が表示されます（DBのパスワードとかはちゃんと設定してね）。rails5になってデフォルト画面変わっていることに少しの感動を覚える僕。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ rails s -b 0.0.0.0 -p 8888
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;コントローラーの作成&#34;&gt;コントローラーの作成&lt;/h2&gt;
+
+&lt;p&gt;長い前準備が終わり、ようやく本命のチャットアプリに着手します。ジェネレータでチャット表示用のコントローラーを作成します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ./bin/rails g controller rooms show
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;モデルの作成&#34;&gt;モデルの作成&lt;/h2&gt;
+
+&lt;p&gt;次は当然モデルですね。メッセージ保存用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ./bin/rails g model message content:text
+$ ./bin/rails db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ビューの作成&#34;&gt;ビューの作成&lt;/h2&gt;
+
+&lt;p&gt;本体と、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haml&#34;&gt;&amp;lt;h1&amp;gt;Chat room&amp;lt;/h1&amp;gt;
+
+&amp;lt;div id=&amp;quot;messages&amp;quot;&amp;gt;
+  &amp;lt;%= render @messages %&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;パーシャル。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haml&#34;&gt;&amp;lt;div class=&amp;quot;message&amp;quot;&amp;gt;
+  &amp;lt;p&amp;gt;&amp;lt;%= message.content%&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;チャネルの作成&#34;&gt;チャネルの作成&lt;/h2&gt;
+
+&lt;p&gt;んで、これまたジェネレータでチャンネルを作っていきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ./bin/rails g channel room speak
+Running via Spring preloader in process 11323
+      create  app/channels/room_channel.rb
+   identical  app/assets/javascripts/cable.js
+      create  app/assets/javascripts/channels/room.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;app/channels/room_channel.rb&lt;/code&gt;と&lt;code&gt;app/assets/javascripts/channels/room.coffee&lt;/code&gt;が作成されました（ナニコレ）。前者がサーバーサイドの処理、後者がフロント側の処理を担当するっぽい。&lt;/p&gt;
+
+&lt;p&gt;んで、ここまでくればWebSocketのコネクションが貼れるはずだったんだけど、ここでエラーが発生します。どうやら許可されていないホストらしい。わざわざ許可せないかんのか。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Started GET &amp;quot;/cable&amp;quot; for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+Cannot render console from 192.168.33.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started GET &amp;quot;/cable/&amp;quot; [WebSocket] for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+Request origin not allowed: http://192.168.33.33:8888
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished &amp;quot;/cable/&amp;quot; [WebSocket] for 192.168.33.1 at 2016-09-27 12:40:45 +0000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先人によると、設定を追加してあげないといけないようで、&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;http://morizyun.github.io/blog/action-cable-introduction-reading/&#34;&gt;Action CableのREADMEを読んでみた！&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;僕の環境だと、以下の設定を&lt;code&gt;config/environments/development.rb&lt;/code&gt;に追記してあげました。ここは人それぞれだと思うので、自信の環境に合うように設定してください。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;config.action_cable.allowed_request_origins = [&#39;http://localhost:8888&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;追記して再起動したらOKになりました。うん、いいね順調順調。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Finished &amp;quot;/cable/&amp;quot; [WebSocket] for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Started GET &amp;quot;/cable&amp;quot; for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started GET &amp;quot;/cable/&amp;quot; [WebSocket] for 10.0.2.2 at 2016-09-27 12:43:43 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+RoomChannel is transmitting the subscription confirmation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとはもうガーッとコーディングしていけば完成！DBに突っ込んだりイベント発火させたりわちゃわちゃわちゃわちゃ必要だもんね。ガーッと書きましょう。ガーッと。&lt;/p&gt;
+
+&lt;p&gt;で、この時点のコードを見たい方は&lt;a href=&#34;https://github.com/nabeen/trailen/tree/chat-app-base&#34;&gt;Github&lt;/a&gt;に乗せていますので、そちらをご参照あれ（書く気力がなくなった）。
+もちろん本番で運用する場合はもっと設定が必要ですが、とりあえずサクッと作れそうだなという感触は得られましたね。&lt;/p&gt;
+
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+
+&lt;p&gt;今回はサクッと作るところまでで終わったけど、最終的にはあれやこれやしてメインのWEBアプリのサブ機能的な位置づけでひっそり存在するくらいにはしていきたいという願望。&lt;/p&gt;
+
+&lt;p&gt;ぼくはれいるずとおともだちになるんだ！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【イベントレポート】HackerTackleに参加してきた #hackt</title>
