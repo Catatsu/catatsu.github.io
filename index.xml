@@ -11,7 +11,7 @@
     <atom:link href="https://catatsu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>ReactNativeの開発環境構築~HelloWorld</title>
+      <title>ReactNativeの開発環境構築</title>
       <link>https://catatsu.github.io/2016/09/27/react-native-tutorial</link>
       <pubDate>Tue, 27 Sep 2016 23:35:00 +0900</pubDate>
       
@@ -19,7 +19,7 @@
       <description>
 
 &lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/matumotto&#34;&gt;@matumotto&lt;/a&gt;)です。
-ReactNativeを久しぶりに覗いたらバージョンがめっちゃがってたので、1からやりなおしていきます。&lt;/p&gt;
+ReactNativeを久しぶりに覗いたらバージョンがめっちゃあがってたので、1からやりなおしていきます。&lt;/p&gt;
 
 &lt;p&gt;※OS X環境想定&lt;/p&gt;
 
@@ -35,7 +35,7 @@ ReactNativeを久しぶりに覗いたらバージョンがめっちゃがって
 &lt;li&gt;まずnode.jsとwatchmanをインストール&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;brew install node
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew install node
 brew install watchman
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -45,7 +45,7 @@ brew install watchman
 &lt;li&gt;npmでReactNativeのコマンドツールをインストール&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g react-native-cli
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm install -g react-native-cli
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;hr /&gt;
@@ -56,14 +56,14 @@ brew install watchman
 &lt;li&gt;まずはプロジェクトを作成する&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;react-native init TestProject
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;react-native init TestProject
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
 &lt;li&gt;移動&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt; cd TestProject
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; cd TestProject
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
@@ -87,7 +87,7 @@ brew install watchman
 &lt;li&gt;文言を変更する&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt; sed -i &#39;&#39; &#39;s/Welcome to React Native!/Hello React!/g&#39; index.android.js
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; sed -i &#39;&#39; &#39;s/Welcome to React Native!/Hello React!/g&#39; index.android.js
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;

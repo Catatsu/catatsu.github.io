@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ReactNativeの開発環境構築~HelloWorld -- Catatsu Tech Blog</title>
+    <title>ReactNativeの開発環境構築 -- Catatsu Tech Blog</title>
 
     
 
@@ -77,8 +77,8 @@
         <div class="row">
            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
              <div class="post-heading">
-               <h1>ReactNativeの開発環境構築~HelloWorld</h1>
-               <h2 class="subheading">ReactNativeの開発環境構築~HelloWorld</h2>
+               <h1>ReactNativeの開発環境構築</h1>
+               <h2 class="subheading">環境構築〜そしてHelloWorld</h2>
                <span class="meta">Posted by <a href="#">matumotto</a> on Tue, Sep 27, 2016
                  <br />
                  In <a href="https://catatsu.github.io/categories/react-native">React-Native</a>
@@ -100,7 +100,7 @@
                   
 
 <p>どうも僕(<a href="https://github.com/matumotto">@matumotto</a>)です。
-ReactNativeを久しぶりに覗いたらバージョンがめっちゃがってたので、1からやりなおしていきます。</p>
+ReactNativeを久しぶりに覗いたらバージョンがめっちゃあがってたので、1からやりなおしていきます。</p>
 
 <p>※OS X環境想定</p>
 
@@ -116,7 +116,7 @@ ReactNativeを久しぶりに覗いたらバージョンがめっちゃがって
 <li>まずnode.jsとwatchmanをインストール</li>
 </ul>
 
-<pre><code>brew install node
+<pre><code class="language-bash">brew install node
 brew install watchman
 </code></pre>
 
@@ -126,7 +126,7 @@ brew install watchman
 <li>npmでReactNativeのコマンドツールをインストール</li>
 </ul>
 
-<pre><code>npm install -g react-native-cli
+<pre><code class="language-bash">npm install -g react-native-cli
 </code></pre>
 
 <hr />
@@ -137,14 +137,14 @@ brew install watchman
 <li>まずはプロジェクトを作成する</li>
 </ul>
 
-<pre><code>react-native init TestProject
+<pre><code class="language-bash">react-native init TestProject
 </code></pre>
 
 <ul>
 <li>移動</li>
 </ul>
 
-<pre><code> cd TestProject
+<pre><code class="language-bash"> cd TestProject
 </code></pre>
 
 <ul>
@@ -168,7 +168,7 @@ brew install watchman
 <li>文言を変更する</li>
 </ul>
 
-<pre><code> sed -i '' 's/Welcome to React Native!/Hello React!/g' index.android.js
+<pre><code class="language-bash"> sed -i '' 's/Welcome to React Native!/Hello React!/g' index.android.js
 </code></pre>
 
 <ul>
@@ -237,7 +237,7 @@ Hello React! やったね！</li>
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'XX-00000000-0', 'auto');
+  ga('create', 'UA-84874723-1', 'auto');
   ga('send', 'pageview');
 </script>
 
