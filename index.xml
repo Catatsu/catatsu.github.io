@@ -21,10 +21,10 @@
 &lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/matumotto&#34;&gt;@matumotto&lt;/a&gt;)です。
 ReactNativeを久しぶりに覗いたらバージョンがめっちゃあがってたので、1からやりなおしていきます。&lt;/p&gt;
 
-&lt;p&gt;※OS X環境想定
-node: v4.2.2
+&lt;p&gt;※OS X環境想定&lt;br /&gt;
+node: 4.2.2,
 react: 15.3.2,
-react-native&amp;rdquo;: 0.34.0&lt;/p&gt;
+react-native: 0.34.0&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -79,6 +79,8 @@ brew install watchman
  react-native run-android
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;※ iOSの場合は &lt;code&gt;run-ios&lt;/code&gt; になります。&lt;/p&gt;
+
 &lt;hr /&gt;
 
 &lt;h3 id=&#34;アプリが立ち上がった&#34;&gt;アプリが立ち上がった！&lt;/h3&gt;
@@ -98,8 +100,7 @@ brew install watchman
 &lt;h3 id=&#34;変更をアプリに反映&#34;&gt;変更をアプリに反映&lt;/h3&gt;
 
 &lt;p&gt;アプリのメニューからReloadを選択するとテキストが更新されます。&lt;br&gt;
-Hello React! やったね！&lt;br&gt;
-※ iOSの場合は &lt;code&gt;run-ios&lt;/code&gt; になります。&lt;/p&gt;
+Hello React! やったね！&lt;/p&gt;
 
 &lt;p&gt;おしまい。&lt;/p&gt;
 
