@@ -83,7 +83,7 @@ brew install watchman
 
 &lt;h3 id=&#34;アプリが立ち上がった&#34;&gt;アプリが立ち上がった！&lt;/h3&gt;
 
-&lt;p&gt;すこし文言を替えてみます！
+&lt;p&gt;すこし文言を替えてみます！&lt;br&gt;
  起動したままで、プロジェクト内にある&amp;rdquo;index.android.js&amp;rdquo;を変更してみましょう！&lt;/p&gt;
 
 &lt;ul&gt;
@@ -93,10 +93,12 @@ brew install watchman
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; sed -i &#39;&#39; &#39;s/Welcome to React Native!/Hello React!/g&#39; index.android.js
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;アプリに反映&#34;&gt;アプリに反映&lt;/h4&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;アプリのメニューからReloadを選択するとテキストが更新されます。
-Hello React! やったね！
+&lt;h3 id=&#34;変更をアプリに反映&#34;&gt;変更をアプリに反映&lt;/h3&gt;
+
+&lt;p&gt;アプリのメニューからReloadを選択するとテキストが更新されます。&lt;br&gt;
+Hello React! やったね！&lt;br&gt;
 ※ iOSの場合は &lt;code&gt;run-ios&lt;/code&gt; になります。&lt;/p&gt;
 
 &lt;p&gt;おしまい。&lt;/p&gt;
