@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LAMPエンジニアがSwiftを始めた時に必ずぶち当たるであろう壁について簡単に説明する -- Catatsu Tech Blog</title>
+
+    
+
+    
+    <link href="https://catatsu.github.io/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://catatsu.github.io/css/clean-blog.min.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/prism.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/catatsu.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    <script src="https://catatsu.github.io/js/prism.js"></script>
+
+    
+    <link rel="shortcut icon" href="https://catatsu.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://catatsu.github.io">Catatsu Tech Blog</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <div class="site-heading">
+             <h1>Catatsu Tech Blog</h1>
+             <hr class="small">
+             <span class="subheading">CatatsuはHASIGOです</span>
+           </div>
+         </div>
+       </div>
+     </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row __inner_post">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+               <div class="post-preview">
+                 <p class="post-meta">Thu, Sep 29, 2016</p>
+                 <a href="https://catatsu.github.io/2016/09/29/hello-swift">
+                      <h1 class="post-title" style="margin-top: 10px">LAMPエンジニアがSwiftを始めた時に必ずぶち当たるであろう壁について簡単に説明する</h2>
+                 </a>
+                  <p class="post-meta">Posted by <a href="https://github.com/nabeen">nabeen</a></p>
+                  <p class="post-meta">Categories <a class="categories" href="https://catatsu.github.io/categories/swift">Swift</a><a class="categories" href="https://catatsu.github.io/categories/xcode">Xcode</a>
+</p>
+                  <p class="post-meta">Tags <a class="tags" href="https://catatsu.github.io/tags/swift">#swift</a><a class="tags" href="https://catatsu.github.io/tags/xcode">#xcode</a><a class="tags" href="https://catatsu.github.io/tags/delegate">#delegate</a><a class="tags" href="https://catatsu.github.io/tags/optional">#optional</a></p>
+                </div>
+                <hr>
+
+                  
+
+<p>どうも僕(<a href="https://github.com/nabeen">@nabeen</a>)です。</p>
+
+<p>ペーペーエンジニアの僕ですが、今までは基本的にPHPでお仕事してきました。でもとあるプロジェクトでいきなりSwiftで書かれたプロダクトを引き継ぐことに、、、！今日はそんな僕が最初に躓いた（今でも躓いている）ことについてお話させていただきます。</p>
+
+<h2 id="大前提">大前提</h2>
+
+<p>チュートリアルから始めて新規開発とかだとまた違うんでしょうけど、「既存のプロダクト」を「SwiftのSも知らないLAMPエンジニア」が引き継いだ、というちょっと変わった状況であることを念頭に置いておいてください。</p>
+
+<p>ちなみに、Objective-Cも書いたことはありません。</p>
+
+<h2 id="viewの作り方がわからんよ">Viewの作り方がわからんよ</h2>
+
+<p>現時点の結論：Storyboardで全体の画面遷移を定義して、細かい部品をxibで作る</p>
+
+<p>我々LAMPエンジニアは、Viewと言えばHTMLです。CSSです。JSです。<strong>でもSwift（というかネイティブ）は違うんだってね！</strong></p>
+
+<p>基本的にはGUIで作り込んでいくことになります。GUIでなんとかコンポーネントをドラッグ&amp;ドロップして、GUIでサイズ指定して、GUIで位置指定して、GUIでごにょごにょ。この辺はコード的にはXMLで定義されてるんですけど、なんだか「見えない部分でやってる感」がすごい。</p>
+
+<p>なんか昔Dreamweaverのビジュアルエディタで位置調整してた時を少し思い出したよ。</p>
+
+<h2 id="view作ってたらconstraintsがーーって怒られるよ">View作ってたらConstraintsがーーって怒られるよ</h2>
+
+<p>現時点の結論：きちんと制約をつけましょう</p>
+
+<p>Xcodeは結構頭がいいので、「なんかこれどこに配置するのかあやふやじゃね？」って時に、ちゃんと僕を怒ってくれます。赤で怒られるから、結構強めに怒ってるのかな。</p>
+
+<p>でも悪いのはConstraintsをきちんと設定していない僕なので、今ではむしろ感謝しています！Xcodeありがとう！</p>
+
+<h2 id="xib表示しただけでなんかdiff出るんだけど">xib表示しただけでなんかdiff出るんだけど？</h2>
+
+<p>現時点の結論：自分が「意図的に変更した」部分以外はrevertする</p>
+
+<p>なんかXMLにOXのシステムバージョンを持っていて、更新されてるとdiffが出てしまう。これはマジでうざい。システム情報なんて持たないで欲しい。ファック！ファック！！ファック！！！</p>
+
+<p>社内のメンターに聞いたところ、「そういうもん」らしい。まじかよ。マゾかよ。</p>
+
+<h2 id="とか-とかあるけど-あれなんなん">?とか!とかあるけど、あれなんなん?</h2>
+
+<p>現時点の結論：とりあえず<a href="http://qiita.com/maiki055/items/b24378a3707bd35a31a8">ここ</a>読んどけばいい</p>
+
+<p>オプショナル型っていうらしい。いわゆるヌルポ（この前覚えた言葉）を防いでくれるために使われるやつで、世界各国のSwiftエンジニアが便利便利と阿吽絶叫しているようだけど、他の言語にはない概念なので( ﾟдﾟ)ﾎﾟｶｰﾝとしていた。</p>
+
+<p>でも上記の記事を読んでおけば、( ﾟдﾟ)ﾎﾟｶｰﾝから(<em>´﹃｀</em>)ﾀﾞﾗｰくらいにはなると思う。</p>
+
+<h2 id="delegateってなんだよファックかよ">delegateってなんだよファックかよ</h2>
+
+<p>現時点の結論：自分で使える気がしない</p>
+
+<p>delegateはprotcolとセットで出てきて、「何かの処理を依頼する」時に使われるもの、らしい。という概念自体は<a href="http://qiita.com/mochizukikotaro/items/a5bc60d92aa2d6fe52ca">このへん</a>とか読めばわかるんだけど、なんか現実的なユースケースがよくわからない。</p>
+
+<p>ごめん。</p>
+
+<h2 id="viewのviewdidloadとかっていつ呼ばれんの">ViewのviewDidloadとかっていつ呼ばれんの？</h2>
+
+<p>現時点の結論：ライフサイクルはわかったけどいつ何の処理を書けばいいのやら</p>
+
+<p>例えば僕がやっているプロジェクトだと、ViewControllerでこういうのが結構呼ばれている。</p>
+
+<pre><code class="language-swift">override func viewDidLoad() {
+    super.viewDidLoad()
+	
+	//ごにょごにょ
+}
+</code></pre>
+
+<p>上記から察するに、「親クラスのアクションを上書きしてるんだな」「親クラスのアクションも呼び出すんだな」ってことはわかるんだけど、じゃあこれいつ呼ばれんの、と。調べてみると<a href="http://qiita.com/mo_to_44/items/0ca628b4cc74c8c5599d">ライフサイクル</a>がちゃんとあって、呼び出し順があるようだ（当然か）。jQueryの<code>$(document).ready</code>みたいなもんね。</p>
+
+<p>でもこのライフサイクルがあるのはいいけど、どこになんの処理を書くのがベストプラクティスなんですか？</p>
+
+<h2 id="デフォルトで組み込まれているクラス群-関数群がわからない">デフォルトで組み込まれているクラス群、関数群がわからない</h2>
+
+<p>現時点の結論：覚えるしか無い</p>
+
+<p>Javaもそうなんだけど、「やたらと長い名前の標準関数」みたいなのが、Swiftにもあります。んで、そもそもどんなクラス、関数があるのかってのは、もう覚えるしかない。覚える以外の方法があったら教えて欲しい。</p>
+
+<h2 id="observerにobservable">ObserverにObservable</h2>
+
+<p>現時点の結論：僕にはまだ早かった</p>
+
+<p>いわゆるReactiveプログラミングの概念。監視対象を決めて、それが変わったらあれもこれもそれも自動で変えてねっていうような感じの仕組み？かな？</p>
+
+<p>わかってる人風に言うと、<strong>Reactiveを使えば簡単に状態管理を制御できます。</strong></p>
+
+<p>Swiftうんぬんというよりも、Reactiveプログラミングに触れたことがない僕はまだまだ理解に及んでいません。</p>
+
+<p>ううっ。</p>
+
+<h2 id="おまけ-感想">おまけ：感想</h2>
+
+<p>基本的にはViewを作るだけなのに、なんでこんなに知らない技術が出てくるんだ！</p>
+
+<p>プロダクトの特性上、ネイティブでロジックをガリガリ書くってことはなく、APIのレスポンスで何をどう表示するかってのがメインになります。要はViewをいい感じにするだけ、処理はAPI。でもでもでもでもなんだか難しい！</p>
+
+<p>そもそもコンパイラ型言語っぽい書き方にまだ慣れてない。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>とりあえず今日からiOSエンジニアって名乗っておきますね(<em>´﹃｀</em>)</p>
+
+
+                
+                <div class="text-right">
+                  
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="catatsu_app" data-lang="ja" data-size="large">ツイート</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                  
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3a%2f%2fcatatsu.github.io%2f2016%2f09%2f29%2fhello-swift&width=72&layout=box_count&action=like&size=small&show_faces=true&share=true&height=65&appId" width="72" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+                  
+                  <script type="text/javascript" language="javascript">
+                  document.write("<a href=\"http://b.hatena.ne.jp/entry/https:\/\/catatsu.github.io\/2016\/09\/29\/hello-swift\" class=\"hatena-bookmark-button\" data-hatena-bookmark-title=\""+document.title+"\" data-hatena-bookmark-layout=\"vertical-balloon\" title=\"このエントリーをはてなブックマークに追加\"><img src=\"http://b.st-hatena.com/images/entry-button/button-only.gif\" alt=\"このエントリーをはてなブックマークに追加\" width=\"20\" height=\"20\" style=\"border: none;\" /></a>");</script>
+
+                  
+                  <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async">
+                  </script>
+                  <div class="g-plusone" data-size="tall"></div>
+                  <script type="text/javascript">
+                    window.___gcfg = {lang: 'ja'};
+                    (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                   </script>
+                </div>
+                <div id="disqus_thread"></div>
+             </div>
+          </div>
+        <script>
+        
+
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = '//catatsu.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    <li>
+                      <a href="https://github.com/Catatsu">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://catatsu.github.io/js/jquery.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/bootstrap.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/clean-blog.js"></script>
+
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84874723-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
