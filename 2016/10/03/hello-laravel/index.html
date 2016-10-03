@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    
+    
+    <meta name="description" content="CatatsuはHASIGOです">
+    
+
+    
+    
+    <meta name="author" content="nabeen">
+    
+
+    
+    <title>PHP界隈で一番ナウい（けど遅い）という噂のLaravelをサクッと触ってなんとなく理解する -- Catatsu Tech Blog</title>
+
+
+    
+
+    
+    <link href="https://catatsu.github.io/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://catatsu.github.io/css/clean-blog.min.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/prism.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/catatsu.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    <script src="https://catatsu.github.io/js/prism.js"></script>
+
+    
+    <link rel="shortcut icon" href="https://catatsu.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://catatsu.github.io">Catatsu Tech Blog</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <div class="site-heading">
+             <h1>Catatsu Tech Blog</h1>
+             <hr class="small">
+             <span class="subheading">CatatsuはHASIGOです</span>
+           </div>
+         </div>
+       </div>
+     </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row __inner_post">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+               <div class="post-preview">
+                 <p class="post-meta">Mon, Oct 3, 2016</p>
+                 <a href="https://catatsu.github.io/2016/10/03/hello-laravel">
+                      <h1 class="post-title" style="margin-top: 10px">PHP界隈で一番ナウい（けど遅い）という噂のLaravelをサクッと触ってなんとなく理解する</h2>
+                 </a>
+                  <p class="post-meta">Posted by <a href="https://github.com/nabeen">nabeen</a></p>
+                  <p class="post-meta">Categories <a class="categories" href="https://catatsu.github.io/categories/php">Php</a><a class="categories" href="https://catatsu.github.io/categories/laravel">Laravel</a>
+</p>
+                  <p class="post-meta">Tags <a class="tags" href="https://catatsu.github.io/tags/php">#php</a><a class="tags" href="https://catatsu.github.io/tags/laravel">#laravel</a><a class="tags" href="https://catatsu.github.io/tags/homestead">#homestead</a><a class="tags" href="https://catatsu.github.io/tags/artisan">#artisan</a></p>
+                </div>
+                <hr>
+
+                  
+
+<p>どうも僕(<a href="https://github.com/nabeen">@nabeen</a>)です。</p>
+
+<p>RubyにはRailsというRubyのフレームワークといえばコレ！みたいなものがあるんですが、残念ながらPHP界隈にはRailsに該当するようなフレームワークはありません。</p>
+
+<p>そんな中、個人的に一番ナウいと思っているPHPフレームワークLaravelに触れるべく、サンプルアプリを通してその使いやすさを実感してみようと思います！</p>
+
+<h2 id="開発環境構築">開発環境構築</h2>
+
+<p>ナウいフレームワークだけあって、Laravelは<code>composer</code>で入れる、また、<code>vagrant</code>も標準で準備されています。最高！最高！ふぅうううーーーーーー！！</p>
+
+<pre><code class="language-bash">$ composer require laravel/homestead
+</code></pre>
+
+<pre><code class="language-bash">$ php vendor/bin/homestead make
+</code></pre>
+
+<p>ここまでやれば<code>vagrant up</code>までたどり着きます。マジかよ楽かよ。</p>
+
+<pre><code class="language-bash">$ vagrant up
+</code></pre>
+
+<pre><code class="language-bash">$ vagrant ssh
+</code></pre>
+
+<p>あとはアプリをサクッと作るぜ！</p>
+
+<pre><code class="language-bash">$ composer create-project laravel/laravel --prefer-dist laravel-apps
+</code></pre>
+
+<p>とここまで来て気づいたんですが、プロジェクト配下でアプリを作ってしまったので階層がちょっと気持ち悪い感じになってしまいました。</p>
+
+<p>のでちょっと変えて、こんな感じに。<code>vagrant</code>関連はvagrant配下に押しやっています。ちょっとスッキリ。</p>
+
+<pre><code class="language-bash">$ tree -L 1 ./
+./
+├── app
+├── artisan
+├── bootstrap
+├── composer.json
+├── composer.lock
+├── config
+├── database
+├── gulpfile.js
+├── package.json
+├── phpunit.xml
+├── public
+├── readme.md
+├── resources
+├── routes
+├── server.php
+├── storage
+├── tests
+├── vagrant
+└── vendor
+</code></pre>
+
+<p>あとはブラウザから<code>http://192.168.10.10/</code>を叩けば、デフォルトページが出ていますね！ね？え？出るよね？</p>
+
+<h2 id="チュートリアル">チュートリアル</h2>
+
+<p>公式にはチュートリアル的なものがなかったので、<a href="http://qiita.com/fumiyasac@github/items/78a335880f7abb1de8bf">こちら</a>のチュートリアル的なのを参考に、Laravelっていきます。</p>
+
+<p>やることはリンク先にある通りなので爆、ポイントをかいつまんで説明します。</p>
+
+<p>マイグレーションファイルを作るコマンドは以下。中身は完全Skeletonなので、自分でガリガリ書いていきましょう。書くべし書くべし！</p>
+
+<pre><code class="language-bash">$ php artisan make:migration create_topics_table
+</code></pre>
+
+<p>マイグレーションの適用もちゃんとコマンドで。</p>
+
+<pre><code class="language-bash">$ php artisan migrate
+</code></pre>
+
+<p>戻したければロールバックもできる。ロールバックは、「前回適用したもの」がロールバックされるようだ（※一気に幾つかマイグレーションしたら一気にいくつかロールバックされる）。</p>
+
+<pre><code class="language-bash">$ php artisan migrate:rollback
+</code></pre>
+
+<p>モデルもジェネレータで生成できる。</p>
+
+<pre><code>$ php artisan make:model Topic
+</code></pre>
+
+<p>ときたら当然コントローラーもジェネレータで生成できます。</p>
+
+<pre><code>$ php artisan make:controller TopicsController
+</code></pre>
+
+<p>でもこれ、ホント単一ファイル(テストもないしViewもない)しか生成してくれないので、そんなに使い勝手は良くないかも。。コレくらいだったら<code>cp</code>でコピーしちゃった方がいいかもしんない。</p>
+
+<p>まぁそれは置いといて、<code>rails c</code>的なあれもあります。</p>
+
+<pre><code>$ php artisan tinker
+</code></pre>
+
+<p>ルーティングは前のバージョンとは変わっていて、<code>routes/web.php</code>で定義されてるっぽい。設定されているルーティングを見るにはこのコマンド。<code>resource</code>でRESTfulなURIも生成できる！Railsライクですね。</p>
+
+<pre><code class="language-bash">$ php artisan route:list
++--------+----------+--------------------+------+----------------------------------------------+--------------+
+| Domain | Method   | URI                | Name | Action                                       | Middleware   |
++--------+----------+--------------------+------+----------------------------------------------+--------------+
+|        | GET|HEAD | /                  |      | App\Http\Controllers\TopicsController@index  | web          |
+|        | GET|HEAD | api/user           |      | Closure                                      | api,auth:api |
+|        | GET|HEAD | topics/add         |      | App\Http\Controllers\TopicsController@add    | web          |
+|        | POST     | topics/create      |      | App\Http\Controllers\TopicsController@create | web          |
+|        | POST     | topics/delete      |      | App\Http\Controllers\TopicsController@delete | web          |
+|        | GET|HEAD | topics/edit/{id}   |      | App\Http\Controllers\TopicsController@edit   | web          |
+|        | POST     | topics/update/{id} |      | App\Http\Controllers\TopicsController@update | web          |
+|        | GET|HEAD | topics/{id}        |      | App\Http\Controllers\TopicsController@show   | web          |
++--------+----------+--------------------+------+----------------------------------------------+--------------+
+</code></pre>
+
+<p>とまぁこんな感じで←え、なんとなくざっくり理解できました。</p>
+
+<p>ここまでのソースは<a href="https://github.com/nabeen/laravel_apps/tree/hello-laravel">Github</a>にあげているので、ご自由にどうぞ。</p>
+
+<h2 id="ちょっと気に食わないところ">ちょっと気に食わないところ</h2>
+
+<p>箇条書きでいきます。</p>
+
+<ul>
+<li>ControllerがHttp配下にあるのが慣れない</li>
+<li>ModelがApp直下にあるのはどうなの？</li>
+<li>ルーティングファイルの名前が<code>web.php</code>だと？</li>
+</ul>
+
+<p>まだ殆どLaravelのメリットは感じられていませんが、とりあえず慣れ親しんだ感じのフォルダ構成から結構逸脱してるなぁという印象。まぁこういうのは慣れだし、そこまで障害にはならないんですが（自分好みの定義にも変えられるんだろうけど、なるべくデフォルトから逸脱したくはない）。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>なんか全然Laravelの機能が把握できなかった気がするけど、触りとしてはこんなもんでいいですかね？</p>
+
+<p>次回はソーシャルログイン辺りを実装していきます。</p>
+
+
+                
+                <div class="text-right">
+                  
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="catatsu_app" data-lang="ja" data-size="large">ツイート</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                  
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3a%2f%2fcatatsu.github.io%2f2016%2f10%2f03%2fhello-laravel&width=72&layout=box_count&action=like&size=small&show_faces=true&share=true&height=65&appId" width="72" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+                  
+                  <script type="text/javascript" language="javascript">
+                  document.write("<a href=\"http://b.hatena.ne.jp/entry/https:\/\/catatsu.github.io\/2016\/10\/03\/hello-laravel\" class=\"hatena-bookmark-button\" data-hatena-bookmark-title=\""+document.title+"\" data-hatena-bookmark-layout=\"vertical-balloon\" title=\"このエントリーをはてなブックマークに追加\"><img src=\"http://b.st-hatena.com/images/entry-button/button-only.gif\" alt=\"このエントリーをはてなブックマークに追加\" width=\"20\" height=\"20\" style=\"border: none;\" /></a>");</script>
+
+                  
+                  <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async">
+                  </script>
+                  <div class="g-plusone" data-size="tall"></div>
+                  <script type="text/javascript">
+                    window.___gcfg = {lang: 'ja'};
+                    (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                   </script>
+                </div>
+                <div id="disqus_thread"></div>
+             </div>
+          </div>
+        <script>
+        
+
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = '//catatsu.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    <li>
+                      <a href="https://github.com/Catatsu">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://catatsu.github.io/js/jquery.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/bootstrap.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/clean-blog.js"></script>
+
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84874723-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
