@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    
+    
+    <meta name="description" content="CatatsuはHASIGOです">
+    
+
+    
+    
+    <meta name="author" content="nabeen">
+    
+
+    
+    <title>LINE Notifyが楽しそうだったので試してみた -- Catatsu Tech Blog</title>
+
+
+    
+
+    
+    <link href="https://catatsu.github.io/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://catatsu.github.io/css/clean-blog.min.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/prism.css" rel="stylesheet">
+    <link href="https://catatsu.github.io/css/catatsu.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    <script src="https://catatsu.github.io/js/prism.js"></script>
+
+    
+    <link rel="shortcut icon" href="https://catatsu.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://catatsu.github.io">Catatsu Tech Blog</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://catatsu.github.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    <header class="intro-header" style="background-image: url('https://catatsu.github.io/img/home-bg.jpg')">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <div class="site-heading">
+             <h1>Catatsu Tech Blog</h1>
+             <hr class="small">
+             <span class="subheading">CatatsuはHASIGOです</span>
+           </div>
+         </div>
+       </div>
+     </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row __inner_post">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+               <div class="post-preview">
+                 <p class="post-meta">Mon, Oct 24, 2016</p>
+                 <a href="https://catatsu.github.io/2016/10/24/line-notify">
+                      <h1 class="post-title" style="margin-top: 10px">LINE Notifyが楽しそうだったので試してみた</h2>
+                 </a>
+                  <p class="post-meta">Posted by <a href="https://github.com/nabeen">nabeen</a></p>
+                  <p class="post-meta">Categories <a class="categories" href="https://catatsu.github.io/categories/bot">Bot</a>
+</p>
+                  <p class="post-meta">Tags <a class="tags" href="https://catatsu.github.io/tags/line-notify">#line notify</a></p>
+                </div>
+                <hr>
+
+                  
+
+<p>どうも僕(<a href="https://github.com/nabeen">@nabeen</a>)です。</p>
+
+<p>皆さん、LINE使ってますか？使ってますね？</p>
+
+<p>イマドキ、連絡は絶対メールで！なんて古風なやり方を続けている方はIT界隈にはいないと思いますが、色んな通知を色んなサービスで受けるのはちょっとつらたん。。そこで、通知関連をLINEにまとめられると色々便利ですよね（多分）。</p>
+
+<p>ただし、用法用量は守ってご利用ください（個人的に業務連絡をLINEでやるのは反対派です）。</p>
+
+<h2 id="手順">手順</h2>
+
+<ul>
+<li>アクセストークンの発行</li>
+<li><code>Authorization: Bearer</code>に発行したトークンを入れてmessageをPOST</li>
+</ul>
+
+<p>これだけ。簡単。</p>
+
+<h2 id="なにわともあれトークン発行">なにわともあれトークン発行</h2>
+
+<p>まずは登録してアクセストークンを発行しましょう。</p>
+
+<p><a href="https://notify-bot.line.me/ja/">https://notify-bot.line.me/ja/</a></p>
+
+<p>ポチポチするだけです。</p>
+
+<h2 id="curlでpostしてみる">curlでPOSTしてみる</h2>
+
+<pre><code>curl -X POST -H 'Authorization: Bearer &lt;token&gt;' -F 'message=&lt;message&gt;' https://notify-api.line.me/api/notify
+</code></pre>
+
+<p>通知が届きましたね。</p>
+
+<p>こちらからは以上です。</p>
+
+<p>参考：
+<a href="http://qiita.com/okunoryo/items/88c002d74ab173706c93">LINE Notifyをとりあえず使ってみる</a></p>
+
+
+                
+                <div class="text-right">
+                  
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="catatsu_app" data-lang="ja" data-size="large">ツイート</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                  
+                  <iframe src="https://www.facebook.com/plugins/like.php?href=https%3a%2f%2fcatatsu.github.io%2f2016%2f10%2f24%2fline-notify&width=72&layout=box_count&action=like&size=small&show_faces=true&share=true&height=65&appId" width="72" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+                  
+                  <script type="text/javascript" language="javascript">
+                  document.write("<a href=\"http://b.hatena.ne.jp/entry/https:\/\/catatsu.github.io\/2016\/10\/24\/line-notify\" class=\"hatena-bookmark-button\" data-hatena-bookmark-title=\""+document.title+"\" data-hatena-bookmark-layout=\"vertical-balloon\" title=\"このエントリーをはてなブックマークに追加\"><img src=\"http://b.st-hatena.com/images/entry-button/button-only.gif\" alt=\"このエントリーをはてなブックマークに追加\" width=\"20\" height=\"20\" style=\"border: none;\" /></a>");</script>
+
+                  
+                  <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async">
+                  </script>
+                  <div class="g-plusone" data-size="tall"></div>
+                  <script type="text/javascript">
+                    window.___gcfg = {lang: 'ja'};
+                    (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                   </script>
+                </div>
+                <div id="disqus_thread"></div>
+             </div>
+          </div>
+        <script>
+        
+
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = '//catatsu.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    <li>
+                      <a href="https://github.com/Catatsu">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://catatsu.github.io/js/jquery.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/bootstrap.min.js"></script>
+
+    
+    <script src="https://catatsu.github.io/js/clean-blog.js"></script>
+
+    
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84874723-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

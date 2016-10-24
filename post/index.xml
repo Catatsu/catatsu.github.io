@@ -7,8 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Code released under the Apache 2.0 license.</copyright>
-    <lastBuildDate>Mon, 03 Oct 2016 20:51:42 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Oct 2016 11:45:17 +0900</lastBuildDate>
     <atom:link href="https://catatsu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LINE Notifyが楽しそうだったので試してみた</title>
+      <link>https://catatsu.github.io/2016/10/24/line-notify</link>
+      <pubDate>Mon, 24 Oct 2016 11:45:17 +0900</pubDate>
+      
+      <guid>https://catatsu.github.io/2016/10/24/line-notify</guid>
+      <description>
+
+&lt;p&gt;どうも僕(&lt;a href=&#34;https://github.com/nabeen&#34;&gt;@nabeen&lt;/a&gt;)です。&lt;/p&gt;
+
+&lt;p&gt;皆さん、LINE使ってますか？使ってますね？&lt;/p&gt;
+
+&lt;p&gt;イマドキ、連絡は絶対メールで！なんて古風なやり方を続けている方はIT界隈にはいないと思いますが、色んな通知を色んなサービスで受けるのはちょっとつらたん。。そこで、通知関連をLINEにまとめられると色々便利ですよね（多分）。&lt;/p&gt;
+
+&lt;p&gt;ただし、用法用量は守ってご利用ください（個人的に業務連絡をLINEでやるのは反対派です）。&lt;/p&gt;
+
+&lt;h2 id=&#34;手順&#34;&gt;手順&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アクセストークンの発行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Authorization: Bearer&lt;/code&gt;に発行したトークンを入れてmessageをPOST&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これだけ。簡単。&lt;/p&gt;
+
+&lt;h2 id=&#34;なにわともあれトークン発行&#34;&gt;なにわともあれトークン発行&lt;/h2&gt;
+
+&lt;p&gt;まずは登録してアクセストークンを発行しましょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://notify-bot.line.me/ja/&#34;&gt;https://notify-bot.line.me/ja/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ポチポチするだけです。&lt;/p&gt;
+
+&lt;h2 id=&#34;curlでpostしてみる&#34;&gt;curlでPOSTしてみる&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -X POST -H &#39;Authorization: Bearer &amp;lt;token&amp;gt;&#39; -F &#39;message=&amp;lt;message&amp;gt;&#39; https://notify-api.line.me/api/notify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通知が届きましたね。&lt;/p&gt;
+
+&lt;p&gt;こちらからは以上です。&lt;/p&gt;
+
+&lt;p&gt;参考：
+&lt;a href=&#34;http://qiita.com/okunoryo/items/88c002d74ab173706c93&#34;&gt;LINE Notifyをとりあえず使ってみる&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>PHP界隈で一番ナウい（けど遅い）という噂のLaravelをサクッと触ってなんとなく理解する</title>
